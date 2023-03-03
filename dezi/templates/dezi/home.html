@@ -1,0 +1,70 @@
+{% extends 'dezi/layouts/topnavblank.html' %} {% load static %}
+<h1></h1>
+{% block context %}
+<p>This is the home page</p>
+
+<div class="row justify-content-center">
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-header">
+        <h1 class="fw-bold">Image CRUD in Django</h1>
+      </div>
+      <div class="card-body tabledata">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Descritpion</th>
+              <th>Price</th>
+              <th>Image</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in products %}
+            <tr>
+              <td>{{ p.id }}</td>
+              <td>{{ p.name }}</td>
+              <td>{{ p.description }}</td>
+              <td>{{ p.price }}</td>
+              {% if p.image %}
+              <td>
+                <img
+                  src="{{ p.image.url }}"
+                  alt="product image"
+                  class="prod-size"
+                  height="90px"
+                />
+              </td>
+              {% else %}
+              <td>
+                <img
+                  src="{% static 'img/text.png' %}"
+                  alt="product image not found"
+                  class="prod-size"
+                />
+              </td>
+              {% endif %}
+              <td>
+                <a
+                  href="{% url 'editProduct' p.id %}"
+                  class="btn btn-success badge"
+                  >EDIT</a
+                >
+                <a
+                  href="{% url 'deleteProduct' p.id %}"
+                  class="btn btn-danger badge delete"
+                  >Delete</a
+                >
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock context %}

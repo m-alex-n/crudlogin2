@@ -1,0 +1,45 @@
+{% extends 'dezi/layouts/topnavblank.html' %}
+<h1></h1>
+{% block context %}
+
+<!-- Card -->
+<div class="card card-primary">
+  <div class="card-header">
+    <h3 class="card-title">Login Form</h3>
+  </div>
+  <!-- /.card-header -->
+  <!-- form start -->
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="card-body">
+      <div class="form-group">
+        <label for="">Username:</label>
+        <input
+          type="text"
+          name="username"
+          class="form-control"
+          placeholder="Enter username"
+          id=""
+        />
+      </div>
+      <div class="form-group">
+        <label for="">Password:</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          placeholder="Enter username"
+          id=""
+        />
+      </div>
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+  </form>
+</div>
+<!-- /.card -->
+
+{% endblock context %}
