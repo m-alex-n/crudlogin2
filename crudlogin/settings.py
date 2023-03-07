@@ -26,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+nzs8-cr02(mw800y%6!w63&h#=3f#8i80zs=b$@kb(7(!wv*#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['acckey.pythonanywhere.com']
 
 
 # Application definition
@@ -77,13 +77,26 @@ WSGI_APPLICATION = 'crudlogin.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# works on localhost
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'crudlogin2',
+#         'HOST': 'localhost',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'PORT': '3306'
+#     }
+# }
+
+# works on prodcution
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'crudlogin2',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': '',
+        'NAME': 'acckey$crudlogin2',
+        'HOST': 'acckey.mysql.pythonanywhere-services.com',  # find in database host address
+        'USER': 'acckey',
+        'PASSWORD': '5UoaRRTD',
         'PORT': '3306'
     }
 }
@@ -133,6 +146,8 @@ MEDIA_URL = '/images/'
 
 MEDIA_ROOT = BASE_DIR / 'static'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static'
+# ]
+
+STATIC_ROOT = '/home/acckey/crudlogin2/static'

@@ -30,8 +30,15 @@
               <td>{{ p.price }}</td>
               {% if p.image %}
               <td>
+                <!-- on localhost will work
                 <img
                   src="{{ p.image.url }}"
+                  alt="product image"
+                  class="prod-size"
+                  height="90px"
+                /> -->
+                <img
+                  src="{% static p.image %}"
                   alt="product image"
                   class="prod-size"
                   height="90px"
