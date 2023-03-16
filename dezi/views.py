@@ -74,3 +74,7 @@ def deleteProduct(request, pk):
     prod.delete()
     messages.success(request, 'Product deleted successfully')
     return redirect('home')
+
+
+def handling_404(request, exceptions):
+    return render(request, '404.html')

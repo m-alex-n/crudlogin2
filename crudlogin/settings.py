@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-
 import pymysql
 pymysql.install_as_MySQLdb()
 
@@ -28,11 +27,16 @@ SECRET_KEY = 'django-insecure-+nzs8-cr02(mw800y%6!w63&h#=3f#8i80zs=b$@kb(7(!wv*#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# works on localhost  when debug= True
-ALLOWED_HOSTS = []
+if DEBUG:
 
-# works on production
-# ALLOWED_HOSTS = ['acckey.pythonanywhere.com']
+    # works on localhost  when debug= True
+    ALLOWED_HOSTS = []
+
+else:
+
+    #  works on production when debug is false
+    # ALLOWED_HOSTS = ['acckey.pythonanywhere.com']
+    ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -81,30 +85,31 @@ WSGI_APPLICATION = 'crudlogin.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# works on localhost
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'crudlogin2',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': '',
-        'PORT': '3306'
+if DEBUG:
+    # works on localhost
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'crudlogin2',
+            'HOST': 'localhost',
+            'USER': 'root',
+            'PASSWORD': '',
+            'PORT': '3306'
+        }
     }
-}
 
-
-# works on prodcution
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'acckey$crudlogin2',
-#         'HOST': 'acckey.mysql.pythonanywhere-services.com',  # find in database host address
-#         'USER': 'acckey',
-#         'PASSWORD': '5UoaRRTD',
-#         'PORT': '3306'
-#     }
-# }
+else:
+    # works on prodcution when debug = False
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'acckey$crudlogin2',
+            'HOST': 'acckey.mysql.pythonanywhere-services.com',  # find in database host address
+            'USER': 'acckey',
+            'PASSWORD': '5UoaRRTD',
+            'PORT': '3306'
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -151,10 +156,12 @@ MEDIA_URL = '/images/'
 
 MEDIA_ROOT = BASE_DIR / 'static'
 
-# works on localhost
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
+if DEBUG:
+    # works on localhost
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static'
+    ]
+else:
 
-# works on prodcution
-# STATIC_ROOT = '/home/acckey/crudlogin2/static'
+    # works on prodcution when debug=False
+    STATIC_ROOT = '/home/acckey/crudlogin2/static'

@@ -14,3 +14,5 @@ urlpatterns = [
     path('register/', authview.register, name='register'),
 
 ]
+
+handler404 = 'dezi.views.handling_404'
