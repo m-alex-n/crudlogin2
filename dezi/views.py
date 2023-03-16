@@ -77,4 +77,4 @@ def deleteProduct(request, pk):
 
 
 def handling_404(request, exceptions):
-    return render(request, '404.html')
+    return render(request, 'dezi/404.html')
