@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+nzs8-cr02(mw800y%6!w63&h#=3f#8i80zs=b$@kb(7(!wv*#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 if DEBUG:
 
@@ -36,7 +36,6 @@ else:
 
     #  works on production when debug is false
     ALLOWED_HOSTS = ['acckey.pythonanywhere.com']
-    # ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -59,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_auto_logout.middleware.auto_logout',  # django autologout
 ]
 
 ROOT_URLCONF = 'crudlogin.urls'
@@ -74,6 +74,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # django autologout
+                'django_auto_logout.context_processors.auto_logout_client',
             ],
         },
     },
@@ -111,8 +113,8 @@ else:
         }
     }
 
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+    # Password validation
+    # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -165,3 +167,11 @@ else:
 
     # works on prodcution when debug=False
     STATIC_ROOT = '/home/acckey/crudlogin2/static'
+
+
+# django session timeout
+# logout after 10 minutes of downtime
+AUTO_LOGOUT = {
+    'IDLE_TIME': 3600,
+    'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
+    'MESSAGE': 'The session has expired. Please login again to continue.', }

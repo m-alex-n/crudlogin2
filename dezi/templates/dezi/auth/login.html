@@ -1,6 +1,15 @@
 {% extends 'dezi/layouts/topnavblank.html' %}
 <h1></h1>
 {% block context %}
+<h1></h1>
+
+<!-- django timeout session message -->
+{% for message in messages %}
+<div class="message alert text-center alert-info {{ message.tags }}">
+  {{ message }}
+</div>
+{% endfor %}
+<!-- ./ end of django timeout session message -->
 
 <!-- Card -->
 <div class="card card-primary">
